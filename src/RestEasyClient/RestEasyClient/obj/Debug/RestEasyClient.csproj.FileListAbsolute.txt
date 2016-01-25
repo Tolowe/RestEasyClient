@@ -1,5 +1,0 @@
-K:\CodingProjects\OpenSourceSoftware\RestEasyClient\src\RestEasyClient\RestEasyClient\bin\Debug\RestEasyClient.dll
-K:\CodingProjects\OpenSourceSoftware\RestEasyClient\src\RestEasyClient\RestEasyClient\bin\Debug\RestEasyClient.pdb
-K:\CodingProjects\OpenSourceSoftware\RestEasyClient\src\RestEasyClient\RestEasyClient\obj\Debug\RestEasyClient.csprojResolveAssemblyReference.cache
-K:\CodingProjects\OpenSourceSoftware\RestEasyClient\src\RestEasyClient\RestEasyClient\obj\Debug\RestEasyClient.dll
-K:\CodingProjects\OpenSourceSoftware\RestEasyClient\src\RestEasyClient\RestEasyClient\obj\Debug\RestEasyClient.pdb
