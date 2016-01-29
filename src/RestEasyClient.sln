@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{85E5F0E2-BD9B-4CF6-AACF-BF44F2CBF401}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F1ABF80A-F1F1-411E-9B44-2B63FA505B1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestEasyClient", "RestEasyClient\RestEasyClient.csproj", "{97F76679-E467-41C7-9812-7F39B3A414E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97F76679-E467-41C7-9812-7F39B3A414E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F76679-E467-41C7-9812-7F39B3A414E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F76679-E467-41C7-9812-7F39B3A414E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F76679-E467-41C7-9812-7F39B3A414E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{97F76679-E467-41C7-9812-7F39B3A414E7} = {85E5F0E2-BD9B-4CF6-AACF-BF44F2CBF401}
+	EndGlobalSection
+EndGlobal
