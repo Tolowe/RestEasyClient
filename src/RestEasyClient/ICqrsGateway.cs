@@ -2,19 +2,19 @@
 
 namespace RestEasyClient
 {
-    public interface IRestfulCqrsGateway<T>
+    public interface ICqrsGateway<T>
     {
         void Create<C>(C CreateEntity);
 
         void Create<C>(string ResourcePath, C CreateEntity);
 
-        IList<T> Get<S>(S Search);
+        IList<T> Search<S>(S SearchEntity);
 
-        IList<T> Get<S>(string ResourcePath, S Search);
+        IList<T> Search(string ResourcePath);
 
         T GetById<K>(K Id);
 
-        T GetById<K>(string ResourcePath, K Id);
+        T GetById(string ResourcePath);
 
         void Update<U>(U UpdateEntity);
 
@@ -22,6 +22,6 @@ namespace RestEasyClient
 
         void Delete<K>(K Id);
 
-        void Delete<K>(string ResourcePath, K Id);
+        void Delete(string ResourcePath);
     }
 }
