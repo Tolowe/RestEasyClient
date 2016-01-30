@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using RestEasyClient.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -9,13 +8,11 @@ namespace RestEasyClient.Impl
 {
     public class CqrsGateway<T> : ICqrsGateway<T>
     {
-        private readonly HttpClient _httpClient;
+        private readonly IRestHttpClient _restHttpClient;
 
-        public CqrsGateway(string ProtocolAndDomain)
+        public CqrsGateway(IRestHttpClient RestHttpClient)
         {
-            _httpClient = new HttpClient();
-            var baseUri = (ProtocolAndDomain.EndsWith(@"/") ? ProtocolAndDomain : ProtocolAndDomain + @"/");
-            _httpClient.BaseAddress = new Uri(baseUri);
+            _restHttpClient = RestHttpClient;
         }
 
         public void Create<C>(C CreateEntity)
@@ -29,8 +26,8 @@ namespace RestEasyClient.Impl
             body
                 .Headers
                 .ContentType = new MediaTypeHeaderValue("application/json");
-            _httpClient
-                .PostAsync(_httpClient.BaseAddress + ResourcePath, body)
+            _restHttpClient
+                .PostAsync(_restHttpClient.BaseAddress + ResourcePath, body)
                 .Result
                 .EnsureSuccessStatusCode();
         }
@@ -42,8 +39,8 @@ namespace RestEasyClient.Impl
 
         public void Delete(string ResourcePath)
         {
-            _httpClient
-                .DeleteAsync(_httpClient.BaseAddress + ResourcePath)
+            _restHttpClient
+                .DeleteAsync(_restHttpClient.BaseAddress + ResourcePath)
                 .Result
                 .EnsureSuccessStatusCode();
         }
@@ -55,8 +52,8 @@ namespace RestEasyClient.Impl
 
         public IList<T> Search(string ResourcePath)
         {
-            HttpResponseMessage message = _httpClient
-                .GetAsync(_httpClient.BaseAddress + ResourcePath)
+            HttpResponseMessage message = _restHttpClient
+                .GetAsync(_restHttpClient.BaseAddress + ResourcePath)
                 .Result;
             message.EnsureSuccessStatusCode();
             var content = message
@@ -66,15 +63,15 @@ namespace RestEasyClient.Impl
             return JsonConvert.DeserializeObject<IList<T>>(content);
         }
 
-        public T GetById<K>(K Id)
+        public T FindById<K>(K Id)
         {
-            return GetById(GetPathFromType() + Id);
+            return FindById(GetPathFromType() + Id);
         }
 
-        public T GetById(string ResourcePath)
+        public T FindById(string ResourcePath)
         {
-            HttpResponseMessage message = _httpClient
-                .GetAsync(_httpClient.BaseAddress + ResourcePath)
+            HttpResponseMessage message = _restHttpClient
+                .GetAsync(_restHttpClient.BaseAddress + ResourcePath)
                 .Result;
             message.EnsureSuccessStatusCode();
             var content = message
@@ -95,8 +92,8 @@ namespace RestEasyClient.Impl
             body
                 .Headers
                 .ContentType = new MediaTypeHeaderValue("application/json");
-            _httpClient
-                .PutAsync(_httpClient.BaseAddress + ResourcePath, body)
+            _restHttpClient
+                .PutAsync(_restHttpClient.BaseAddress + ResourcePath, body)
                 .Result
                 .EnsureSuccessStatusCode();
         }
