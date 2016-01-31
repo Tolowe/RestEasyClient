@@ -8,11 +8,11 @@ namespace RestEasyClient.Impl
 {
     public class CqrsGateway<T> : ICqrsGateway<T>
     {
-        private readonly IRestHttpClient _restHttpClient;
+        private readonly HttpClient _httpClient;
 
-        public CqrsGateway(IRestHttpClient RestHttpClient)
+        public CqrsGateway(HttpClient HttpClient)
         {
-            _restHttpClient = RestHttpClient;
+            _httpClient = HttpClient;
         }
 
         public void Create<C>(C CreateEntity)
@@ -26,8 +26,8 @@ namespace RestEasyClient.Impl
             body
                 .Headers
                 .ContentType = new MediaTypeHeaderValue("application/json");
-            _restHttpClient
-                .PostAsync(_restHttpClient.BaseAddress + ResourcePath, body)
+            _httpClient
+                .PostAsync(_httpClient.BaseAddress + ResourcePath, body)
                 .Result
                 .EnsureSuccessStatusCode();
         }
@@ -39,8 +39,8 @@ namespace RestEasyClient.Impl
 
         public void Delete(string ResourcePath)
         {
-            _restHttpClient
-                .DeleteAsync(_restHttpClient.BaseAddress + ResourcePath)
+            _httpClient
+                .DeleteAsync(_httpClient.BaseAddress + ResourcePath)
                 .Result
                 .EnsureSuccessStatusCode();
         }
@@ -52,8 +52,8 @@ namespace RestEasyClient.Impl
 
         public IList<T> Search(string ResourcePath)
         {
-            HttpResponseMessage message = _restHttpClient
-                .GetAsync(_restHttpClient.BaseAddress + ResourcePath)
+            HttpResponseMessage message = _httpClient
+                .GetAsync(_httpClient.BaseAddress + ResourcePath)
                 .Result;
             message.EnsureSuccessStatusCode();
             var content = message
@@ -70,8 +70,8 @@ namespace RestEasyClient.Impl
 
         public T FindById(string ResourcePath)
         {
-            HttpResponseMessage message = _restHttpClient
-                .GetAsync(_restHttpClient.BaseAddress + ResourcePath)
+            HttpResponseMessage message = _httpClient
+                .GetAsync(_httpClient.BaseAddress + ResourcePath)
                 .Result;
             message.EnsureSuccessStatusCode();
             var content = message
@@ -92,8 +92,8 @@ namespace RestEasyClient.Impl
             body
                 .Headers
                 .ContentType = new MediaTypeHeaderValue("application/json");
-            _restHttpClient
-                .PutAsync(_restHttpClient.BaseAddress + ResourcePath, body)
+            _httpClient
+                .PutAsync(_httpClient.BaseAddress + ResourcePath, body)
                 .Result
                 .EnsureSuccessStatusCode();
         }
