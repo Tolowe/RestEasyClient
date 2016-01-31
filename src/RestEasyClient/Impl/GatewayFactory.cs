@@ -1,17 +1,22 @@
-﻿namespace RestEasyClient.Impl
+﻿using System;
+using System.Net.Http;
+
+namespace RestEasyClient.Impl
 {
     public class GatewayFactory : IGatewayFactory
     {
-        private readonly string _protocolAndDomain;
+        private readonly HttpClient _httpClient;
 
         public GatewayFactory(string ProtocolAndDomain)
         {
-            _protocolAndDomain = ProtocolAndDomain;
+            _httpClient = new HttpClient();
+            var baseUri = (ProtocolAndDomain.EndsWith(@"/") ? ProtocolAndDomain : ProtocolAndDomain + @"/");
+            _httpClient.BaseAddress = new Uri(baseUri);
         }
 
         public ICqrsGateway<T> GetCqrsGateway<T>()
         {
-            return new CqrsGateway<T>(_protocolAndDomain);
+            return new CqrsGateway<T>(_httpClient);
         }
     }
 }

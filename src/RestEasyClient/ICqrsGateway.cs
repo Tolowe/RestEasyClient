@@ -12,9 +12,9 @@ namespace RestEasyClient
 
         IList<T> Search(string ResourcePath);
 
-        T GetById<K>(K Id);
+        T FindById<K>(K Id);
 
-        T GetById(string ResourcePath);
+        T FindById(string ResourcePath);
 
         void Update<U>(U UpdateEntity);
 

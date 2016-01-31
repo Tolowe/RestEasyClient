@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using RestEasyClient.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -11,11 +10,9 @@ namespace RestEasyClient.Impl
     {
         private readonly HttpClient _httpClient;
 
-        public CqrsGateway(string ProtocolAndDomain)
+        public CqrsGateway(HttpClient HttpClient)
         {
-            _httpClient = new HttpClient();
-            var baseUri = (ProtocolAndDomain.EndsWith(@"/") ? ProtocolAndDomain : ProtocolAndDomain + @"/");
-            _httpClient.BaseAddress = new Uri(baseUri);
+            _httpClient = HttpClient;
         }
 
         public void Create<C>(C CreateEntity)
@@ -66,12 +63,12 @@ namespace RestEasyClient.Impl
             return JsonConvert.DeserializeObject<IList<T>>(content);
         }
 
-        public T GetById<K>(K Id)
+        public T FindById<K>(K Id)
         {
-            return GetById(GetPathFromType() + Id);
+            return FindById(GetPathFromType() + Id);
         }
 
-        public T GetById(string ResourcePath)
+        public T FindById(string ResourcePath)
         {
             HttpResponseMessage message = _httpClient
                 .GetAsync(_httpClient.BaseAddress + ResourcePath)
