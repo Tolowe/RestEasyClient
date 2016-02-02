@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>$company$</authors>
+    <owners>$company$</owners>
+    <projectUrl>https://github.com/Tolowe/RestEasyClient</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>v 0.0.0.1 First Version of package</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>REST</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>
