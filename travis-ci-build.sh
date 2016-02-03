@@ -1,0 +1,1 @@
+xbuild /p:Configuration=Release src/RestEasyClient.sln /p:TargetFrameworkVersion="v4.5" /p:DebugSymbols=False

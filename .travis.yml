@@ -1,0 +1,10 @@
+language: csharp
+mono:
+  - latest
+solution: src/RestEasyClient.sln
+before_script:
+ - chmod +x ./travis-ci-build.sh ./travis-ci-run-tests.sh
+ 
+script:
+  - ./travis-ci-build.sh
+  - ./travis-ci-run-tests.sh

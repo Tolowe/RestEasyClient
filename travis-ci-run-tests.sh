@@ -1,0 +1,1 @@
+mono --runtime=4.5 ./src/packages/Fixie.1.0.0.41/lib/net45/Fixie.Console.exe ./src/RestEasyClient.Test/bin/Release/RestEasyClient.Test.dll
