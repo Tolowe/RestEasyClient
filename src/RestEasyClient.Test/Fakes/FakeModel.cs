@@ -1,4 +1,4 @@
-﻿namespace RestEasyClient.Test
+﻿namespace RestEasyClient.Test.Fakes
 {
     public class FakeModel
     {
