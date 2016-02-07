@@ -89,7 +89,10 @@ namespace RestEasyClient.Impl
 
         public Task<IList<T>> SearchAsync<S>(S SearchEntity)
         {
-            return SearchAsync(GetPathFromType() + SearchEntity.ToQueryString());
+            var resourceRoute = (GetPathFromType()
+                .Remove(GetPathFromType()
+                    .Length - 1)) + SearchEntity.ToQueryString();
+            return SearchAsync(resourceRoute);
         }
 
         public async Task<IList<T>> SearchAsync(string ResourcePath)

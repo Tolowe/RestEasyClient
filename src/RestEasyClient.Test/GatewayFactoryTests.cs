@@ -1,4 +1,5 @@
 ﻿using RestEasyClient.Impl;
+using RestEasyClient.Test.Fakes;
 using Should;
 
 namespace RestEasyClient.Test
