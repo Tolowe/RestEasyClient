@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using RestEasyClient.Config;
 using RestEasyClient.Extensions;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -10,10 +10,14 @@ namespace RestEasyClient.Impl
     public class CqrsGateway<T> : ICqrsGateway<T>
     {
         private readonly HttpClient _httpClient;
+        private readonly ISerializer _serializer;
+        private readonly string _contentTypeHeader;
 
-        public CqrsGateway(HttpClient HttpClient)
+        public CqrsGateway(HttpClient HttpClient, ISerializer Serializer)
         {
             _httpClient = HttpClient;
+            _serializer = Serializer;
+            _contentTypeHeader = _serializer.ContentType == ContentType.Xml ? @"application/xml" : @"application/json";
         }
 
         public void Create<C>(C CreateEntity)
@@ -78,10 +82,10 @@ namespace RestEasyClient.Impl
 
         public async Task CreateAsync<C>(string ResourcePath, C CreateEntity)
         {
-            HttpContent body = new StringContent(JsonConvert.SerializeObject(CreateEntity));
+            HttpContent body = new StringContent(_serializer.Serialize(CreateEntity));
             body
                 .Headers
-                .ContentType = new MediaTypeHeaderValue("application/json");
+                .ContentType = new MediaTypeHeaderValue(_contentTypeHeader);
             var result = await _httpClient
                 .PostAsync(_httpClient.BaseAddress + ResourcePath, body);
             result.EnsureSuccessStatusCode();
@@ -103,7 +107,7 @@ namespace RestEasyClient.Impl
             var content = await message
                 .Content
                 .ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<IList<T>>(content);
+            return _serializer.Deserialize<List<T>>(content);
         }
 
         public Task<T> FindByIdAsync<K>(K Key)
@@ -119,7 +123,7 @@ namespace RestEasyClient.Impl
             var content = await message
                 .Content
                 .ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(content);
+            return _serializer.Deserialize<T>(content);
         }
 
         public Task UpdateAsync<K, U>(K Key, U UpdateEntity)
@@ -129,10 +133,10 @@ namespace RestEasyClient.Impl
 
         public async Task UpdateAsync<U>(string ResourcePath, U UpdateEntity)
         {
-            HttpContent body = new StringContent(JsonConvert.SerializeObject(UpdateEntity));
+            HttpContent body = new StringContent(_serializer.Serialize(UpdateEntity));
             body
                 .Headers
-                .ContentType = new MediaTypeHeaderValue("application/json");
+                .ContentType = new MediaTypeHeaderValue(_contentTypeHeader);
             var result = await _httpClient
                 .PutAsync(_httpClient.BaseAddress + ResourcePath, body);
             result.EnsureSuccessStatusCode();

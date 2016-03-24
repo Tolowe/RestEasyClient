@@ -20,7 +20,7 @@ namespace RestEasyClient.Test
             _mockHttp = new MockHttpMessageHandler();
             _httpClient = new HttpClient(_mockHttp);
             _httpClient.BaseAddress = new Uri(_protocolAndDomain);
-            _gateway = new CqrsGateway<FakeModel>(_httpClient);
+            _gateway = new CqrsGateway<FakeModel>(_httpClient, new JsonSerializer());
         }
 
         public void ShouldCallHttpGetWithSpecificRouteWhenFindById()

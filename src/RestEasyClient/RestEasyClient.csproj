@@ -44,10 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\ContentType.cs" />
+    <Compile Include="Config\GatewayConfiguration.cs" />
+    <Compile Include="Extensions\SerializerExtensions.cs" />
     <Compile Include="Extensions\UrlBuilderExtensions.cs" />
     <Compile Include="ICqrsGateway.cs" />
     <Compile Include="IGatewayFactory.cs" />
     <Compile Include="Impl\GatewayFactory.cs" />
+    <Compile Include="Impl\JsonSerializer.cs" />
+    <Compile Include="Impl\XmlSerializer.cs" />
+    <Compile Include="ISerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Impl\CqrsGateway.cs" />
   </ItemGroup>
